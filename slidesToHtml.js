@@ -7,20 +7,17 @@ const html = require("rehype-stringify");
 const slidesToHtml = slides => {
   assert.equal(slides.type, "presentation");
 
-  const htmlSlides = slides.children.map(slide => {
-    if (slide.type !== "slide") {
-      throw new Error("can only process slides");
-    }
+  if (slides.length === 0) {
+    return "";
+  }
 
-    const htmlSlideContents = unified()
-      .use(remark2rehype)
-      .runSync(slide);
-    htmlSlideContents.tagName = "section";
-    htmlSlideContents.properties = { class: "slide" };
-
-    return htmlSlideContents;
-  });
-
+  let htmlContent;
+  if (slides.children[0].type === "slide") {
+    htmlContent = slides.children.map(slideToHtml);
+  } else if (slides.children[0].type === "presentation_section") {
+    htmlContent = slides.children.map(sectionToHtml);
+  }
+  const htmlSlides = htmlContent;
   const htmlPresentation = {
     type: "element",
     tagName: "div",
@@ -33,6 +30,25 @@ const slidesToHtml = slides => {
     .stringify(htmlPresentation);
 
   return htmlPresentationString;
+};
+
+const sectionToHtml = section => {
+  const htmlSlides = section.children.map(slideToHtml);
+  return {
+    type: "element",
+    tagName: "section",
+    properties: { class: "presentation_section" },
+    children: htmlSlides
+  };
+};
+
+const slideToHtml = slide => {
+  const htmlSlideContents = unified()
+    .use(remark2rehype)
+    .runSync(slide);
+  htmlSlideContents.tagName = "section";
+  htmlSlideContents.properties = { class: "slide" };
+  return htmlSlideContents;
 };
 
 module.exports.slidesToHtml = slidesToHtml;

@@ -132,9 +132,36 @@ const simple1_remark_parsed_sections = {
   ]
 };
 
+const simple1_html =
+  '<div class="presentation">' +
+  '<section class="slide"><h1>slide 1</h1></section>' +
+  '<section class="slide"><h1>slide 2</h1></section>' +
+  "</div>";
+
+const simple1_html_parsed_h1 =
+  '<div class="presentation">' +
+  '<section class="slide"><h1>slide 1</h1></section>' +
+  '<section class="slide"></section>' +
+  '<section class="slide"><h1>slide 2</h1></section>' +
+  "</div>";
+
+const simple1_html_parsed_sections =
+  '<div class="presentation">' +
+  '<section class="presentation_section">' +
+  '<section class="slide"><h1>slide 1</h1></section>' +
+  '<section class="slide"></section>' +
+  "</section>" +
+  '<section class="presentation_section">' +
+  '<section class="slide"><h1>slide 2</h1></section>' +
+  "</section>" +
+  "</div>";
+
 module.exports = {
   simple1_md,
   simple1_remark,
   simple1_remark_parsed_h1,
-  simple1_remark_parsed_sections
+  simple1_remark_parsed_sections,
+  simple1_html,
+  simple1_html_parsed_h1,
+  simple1_html_parsed_sections
 };
