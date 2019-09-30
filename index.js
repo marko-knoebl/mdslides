@@ -1,4 +1,12 @@
-const {slides, parsePresentation} = require("./slides.js")
+const {
+  mdElementsToSlides,
+  mdElementsToSectionedSlides
+} = require("./slides.js");
 
-module.exports.slides = slides;
-module.exports.parsePresentation = parsePresentation;
+const { slidesToHtml } = require("./slidesToHtml.js");
+
+module.exports = {
+  mdElementsToSlides,
+  mdElementsToSectionedSlides,
+  slidesToHtml
+};

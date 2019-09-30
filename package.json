@@ -1,7 +1,7 @@
 {
-  "name": "@karuga/remark-presentation",
+  "name": "@karuga/md-slides",
   "version": "0.1.0",
-  "description": "create presentation from markdown sources",
+  "description": "create presentation slides from markdown sources",
   "main": "index.js",
   "scripts": {
     "test": "jest"
@@ -16,5 +16,8 @@
   },
   "devDependencies": {
     "jest": "^24.9.0"
+  },
+  "bin": {
+    "mdslides": "./cli.js"
   }
 }
