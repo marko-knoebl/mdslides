@@ -156,6 +156,28 @@ const simple1_html_parsed_sections =
   "</section>" +
   "</div>";
 
+const no_heading = "no heading";
+
+const no_heading_remark = {
+  type: "presentation",
+  children: [
+    {
+      type: "presentation_section",
+      children: [
+        {
+          type: "slide",
+          children: [
+            {
+              type: "paragraph",
+              children: [{ type: "text", value: "no heading" }]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
 module.exports = {
   simple1_md,
   simple1_remark,
@@ -163,5 +185,7 @@ module.exports = {
   simple1_remark_parsed_sections,
   simple1_html,
   simple1_html_parsed_h1,
-  simple1_html_parsed_sections
+  simple1_html_parsed_sections,
+  no_heading,
+  no_heading_remark
 };

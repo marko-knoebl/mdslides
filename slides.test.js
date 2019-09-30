@@ -1,9 +1,10 @@
 const unified = require("unified");
 const remarkParse = require("remark-parse");
 
-const mdElementsToSlides = require("./slides.js").mdElementsToSlides;
-const mdElementsToSectionedSlides = require("./slides.js")
-  .mdElementsToSectionedSlides;
+const {
+  mdElementsToSlides,
+  mdElementsToSectionedSlides
+} = require("./slides.js");
 
 const examples = require("./examples.js");
 
@@ -49,6 +50,16 @@ it("parses simple1 example correctly with presentation sections", () => {
     slideSeparators: ["hr"],
     sectionSeparators: ["h1"]
   });
+  const processedNode = { type: "presentation", children: processed };
+  expect(stripPosition(processedNode)).toEqual(expected);
+});
+
+it("parses bare content without a heading as a paragraph", () => {
+  const input = examples.no_heading;
+  const expected = examples.no_heading_remark;
+
+  const parsed = parser.parse(input);
+  const processed = mdElementsToSectionedSlides(parsed.children);
   const processedNode = { type: "presentation", children: processed };
   expect(stripPosition(processedNode)).toEqual(expected);
 });

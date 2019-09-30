@@ -1,5 +1,4 @@
-const slides = require("./slides.js").slides;
-const parsePresentation = require("./slides.js").parsePresentation;
+const {slides, parsePresentation} = require("./slides.js")
 
 module.exports.slides = slides;
 module.exports.parsePresentation = parsePresentation;
